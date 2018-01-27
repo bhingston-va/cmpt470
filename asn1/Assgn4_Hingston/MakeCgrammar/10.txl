@@ -78,8 +78,12 @@ end define
 
 define if_statement
     if ([conditional]) [NL]
-    [IN] [variable_assignment]
-    [EX] else [NL]
+    [IN] [variable_assignment] [EX] 
+    [opt else_statement]
+end define
+
+define else_statement
+    else [NL]
     [IN] [variable_assignment] [EX]
 end define
 
