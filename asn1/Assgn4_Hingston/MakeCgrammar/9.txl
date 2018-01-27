@@ -32,6 +32,7 @@ define function_body
     [repeat variable_declaration]
     [repeat scan_statement]
     [repeat variable_assignment]
+    [repeat if_statement]
     [repeat print_statement]
     [return_statement]
 end define
@@ -76,7 +77,7 @@ define return_statement
 end define
 
 define if_statement
-    if ([conditional]) [NL][IN] [variable_assignment]
+    if ([conditional]) [NL][IN] [variable_assignment] [EX]
 end define
 
 define conditional
