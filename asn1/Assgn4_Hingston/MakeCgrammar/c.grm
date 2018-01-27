@@ -60,13 +60,11 @@ end define
 define statement
     [variable_declaration] [opt comment]
     | [variable_assignment] [opt comment]
-    | [scan_statement] [opt comment]
-    | [print_statement] [opt comment]
     | [if_statement] [opt comment]
     | [switch_statement] [opt comment]
     | [loops] [opt comment]
     | [function_call] [opt comment]
-    | [comment] [opt comment]
+    | [comment]
     | break; [opt comment] [NL]
     | continue; [opt comment] [NL]
 end define
@@ -100,14 +98,6 @@ end define
 
 define comparison_op
     < | > | == | <= | >=
-end define
-
-define print_statement
-    printf([stringlit][list id]); [NL]
-end define
-
-define scan_statement
-    scanf([stringlit],&[id]); [NL]
 end define
 
 define return_statement
@@ -148,8 +138,8 @@ define switch_statement
 end define
 
 define case_statement
-    case [charlit]: [NL][IN] [print_statement] break; [NL][EX]
-    | default: [NL][IN] [print_statement] [EX]
+    case [charlit]: [NL][IN] [code_block] break; [NL][EX]
+    | default: [NL][IN] [code_block] [EX]
 end define
 
 define loops
