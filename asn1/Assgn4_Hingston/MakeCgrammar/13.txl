@@ -33,12 +33,17 @@ define function_name
 end define
 
 define function_body
-    [repeat variable_declaration]
-    [repeat scan_statement]
-    [repeat variable_assignment]
-    [repeat if_statement]
-    [repeat print_statement]
+    [code_block]
     [return_statement]
+end define
+
+define statement
+    [variable_declaration]
+    | [variable_assignment]
+    | [scan_statement]
+    | [if_statement]
+    | [switch_statement]
+    | [print_statement]
 end define
 
 define return_type
@@ -93,7 +98,7 @@ define return_value
 end define
 
 define if_statement
-    if ([conditional]) [NL][IN] [code_block] [EX] [opt else_statement]
+    if ([conditional]) [NL][IN] [statement] [EX] [opt else_statement]
     | if ([conditional]) [NL] { [NL][IN] [code_block] [EX] } [NL] [opt else_statement]
 end define
 
@@ -107,15 +112,22 @@ define conditional
     | [comparison] [and_or] [comparison]
 end define
 
-% TODO should be `(!(a > 0) && !(b > 0))` but is `(! (a > 0) && ! (b > 0))`
 define comparison
     [id] [comparison_op] [number]
     | !([comparison])
 end define
 
 define code_block
-    [opt variable_assignment]
-    [opt print_statement]
+    [repeat statement]
+end define
+
+define switch_statement
+    switch ([id]) [NL] { [NL][IN] [repeat case_statement] [EX] } [NL]
+end define
+
+define case_statement
+    case [charlit]: [NL][IN] [print_statement] break; [NL][EX]
+    | default: [NL][IN] [print_statement] [EX]
 end define
 
 % Rules:
