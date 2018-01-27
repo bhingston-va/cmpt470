@@ -44,7 +44,7 @@ define statement
     | [print_statement]
     | [if_statement]
     | [switch_statement]
-    | [for_loop]
+    | [loops]
 end define
 
 define return_type
@@ -62,6 +62,7 @@ end define
 define variable_assignment
     [opt key] [opt variable_type] [id] = [expression]; [NL]
     | [opt key] [opt variable_type] [id] = [charlit]; [NL]
+    | [id]++; [NL]
 end define
 
 define expression
@@ -115,6 +116,7 @@ end define
 
 define comparison
     [id] [comparison_op] [number]
+    | [id] [comparison_op] [id]
     | !([comparison])
 end define
 
@@ -131,9 +133,16 @@ define case_statement
     | default: [NL][IN] [print_statement] [EX]
 end define
 
-% TODO want: `i++` get: `i ++`
+define loops
+    [for_loop] | [while_loop]
+end define
+
 define for_loop
     for ([id] = [number];[comparison];[id]++) [NL][IN] [statement] [EX]
+end define
+
+define while_loop
+    while ([conditional]) [NL] { [NL][IN] [code_block] [EX]} [NL]
 end define
 
 % Rules:
