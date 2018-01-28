@@ -81,6 +81,7 @@ define variable_assignment
     [opt key] [opt variable_type] [id] = [expression]; [NL]
     | [opt key] [opt variable_type] [id] = [charlit]; [NL]
     | [id]++; [NL]
+    | [id]--; [NL]
 end define
 
 define expression
@@ -139,6 +140,7 @@ end define
 
 define case_statement
     case [charlit]: [NL][IN] [code_block] break; [NL][EX]
+    | case [number]: [NL][IN] [code_block] break; [NL][EX]
     | default: [NL][IN] [code_block] [EX]
 end define
 

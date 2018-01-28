@@ -127,6 +127,7 @@ end define
 
 define case_statement
     case [charlit]: [NL][IN] [print_statement] break; [NL][EX]
+    | case [number]: [NL][IN] [code_block] break; [NL][EX]
     | default: [NL][IN] [print_statement] [EX]
 end define
 

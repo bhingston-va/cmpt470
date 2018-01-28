@@ -14,7 +14,7 @@ keys
 end keys
 
 compounds
-    && || == <= ++
+    && || == <= ++ --
 end compounds
 
 define c_function
@@ -63,6 +63,7 @@ define variable_assignment
     [opt key] [opt variable_type] [id] = [expression]; [NL]
     | [opt key] [opt variable_type] [id] = [charlit]; [NL]
     | [id]++; [NL]
+    | [id]--; [NL]
 end define
 
 define expression
