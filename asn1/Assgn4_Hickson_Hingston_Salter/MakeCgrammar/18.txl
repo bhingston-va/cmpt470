@@ -90,6 +90,11 @@ define comparison_op
     > | == | <= | <
 end define
 
+define id_or_number
+    [id]
+    | [number]
+end define
+
 define print_statement
     printf([stringlit][opt variable_list]); [NL]
 end define
@@ -145,7 +150,7 @@ define loops
 end define
 
 define for_loop
-    for ([id] = [number];[comparison];[id]++) [opt {] [NL][IN]
+    for ([id] = [id_or_number];[comparison];[id]++) [opt {] [NL][IN]
         [statement]
     [EX] [opt }] [NL]
 end define
