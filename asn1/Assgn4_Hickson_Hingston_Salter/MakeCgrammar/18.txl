@@ -123,7 +123,8 @@ define if_statement
 end define
 
 define else_statement
-    else [NL][IN] [code_block] [EX]
+    else [NL][IN] [statement] [EX]
+    | else [NL][IN] [code_block] [EX]
     | else [NL] { [NL][IN] [code_block] [EX] } [NL]
 end define
 
