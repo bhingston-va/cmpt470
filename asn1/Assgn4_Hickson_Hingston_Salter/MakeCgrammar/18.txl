@@ -146,6 +146,7 @@ end define
 
 define for_loop
     for ([id] = [number];[comparison];[id]++) [NL][IN] [statement] [EX]
+    | for ([id] = [number];[comparison];[id]++) [NL][IN] { [statement] } [EX]
 end define
 
 define while_loop
