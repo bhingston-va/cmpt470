@@ -18,6 +18,7 @@ define variable_type
     int 
     | float
     | char
+    | long
 end define
 
 keys
@@ -25,7 +26,7 @@ keys
 end keys
 
 compounds
-    && || == <= ++
+    && || == <= ++ *=
 end compounds
 
 define c_function
@@ -93,7 +94,7 @@ define and_or
 end define
 
 define comparison_op
-    > | == | <= | <
+    > | == | <= | < | !=
 end define
 
 define id_or_number
@@ -102,7 +103,7 @@ define id_or_number
 end define
 
 define print_statement
-    printf([stringlit][opt variable_list]); [NL]
+    printf([stringlit][opt variable_list][opt variable_list]); [NL]
 end define
 
 define scan_statement
