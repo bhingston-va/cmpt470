@@ -157,9 +157,10 @@ define loops
 end define
 
 define for_loop
-    for ([id] = [id_or_number];[comparison];[id]++) [opt {] [NL][IN]
+    for ([id] = [id_or_number];[comparison];[opt ++][id][opt ++]) [opt {] [NL][IN]
         [statement]
-    [EX] [opt }] [NL]
+    [EX] [opt }]
+    [opt statement] [NL]
 end define
 
 define while_loop
