@@ -1,8 +1,14 @@
 % Grammar:
 define program
     [repeat c_include] [NL]
+
     [c_function]
 end define
+
+comments
+    //
+    /* */
+end comments
 
 define c_include
     '#'include<[id]'.h> [NL]
