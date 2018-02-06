@@ -1,6 +1,6 @@
 
 %include "c.Grm"
-include "../MakeCgrammar/c.grm"
+include "../MakeCgrammar/our_c.grm"
 
 function main
     match [program]

@@ -6,6 +6,7 @@ end comments
 
 define program
     [repeat c_include] [NL]
+
     [c_function]
 end define
 
@@ -14,7 +15,7 @@ define c_include
 end define
 
 define variable_type
-    int | float | char
+    int | float | char | long
 end define
 
 keys
@@ -22,7 +23,7 @@ keys
 end keys
 
 compounds
-    && || == <= >= ++ --
+    && || == <= >= ++ -- *=
 end compounds
 
 define c_function
@@ -98,7 +99,7 @@ define and_or
 end define
 
 define comparison_op
-    < | > | == | <= | >=
+    < | > | == | <= | >= | !=
 end define
 
 define return_statement
@@ -115,7 +116,8 @@ define if_statement
 end define
 
 define else_statement
-    else [NL][IN] [code_block] [EX]
+    else [NL][IN] [statement] [EX]
+    | else [NL][IN] [code_block] [EX]
     | else [NL] { [NL][IN] [code_block] [EX] } [NL]
 end define
 
@@ -149,8 +151,8 @@ define loops
 end define
 
 define for_loop
-    for ([id] = [id_or_number];[comparison];[id]++) [NL][IN] [statement] [EX]
-    | for ([id] = [id_or_number];[comparison];[id]++) [NL] { [NL][IN] [code_block] [EX] } [NL]
+    for ([id] = [id_or_number];[comparison];[pre_or_post_increment]) [NL][IN] [statement] [EX]
+    | for ([id] = [id_or_number];[comparison];[pre_or_post_increment]) [NL] { [NL][IN] [code_block] [EX] } [NL]
 end define
 
 define while_loop
@@ -160,6 +162,10 @@ end define
 
 define id_or_number
     [id] | [number]
+end define
+
+define pre_or_post_increment
+    [id]++ | ++[id]
 end define
 
 % Rules:
