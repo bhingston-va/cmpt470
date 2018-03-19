@@ -21,7 +21,11 @@ package org.gjt.sp.jedit.gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Iterator;
+import java.util.Vector;
+import java.util.concurrent.TimeUnit;
 
+import org.gjt.sp.jedit.GUIUtilities;
 import org.gjt.sp.jedit.jEdit;
 import org.gjt.sp.util.Log;
 
@@ -44,6 +48,15 @@ public class SplashScreen extends JComponent
 			getClass().getResource("/org/gjt/sp/jedit/icons/splash.png"));
 		MediaTracker tracker = new MediaTracker(this);
 		tracker.addImage(image,0);
+
+		groupMembers = new Vector<String>(3);
+		groupMembers.addElement("Corey Hickson, ch@usask.com");
+		groupMembers.addElement("Benj Hinsgton, benj.hignston@usask.com");
+		groupMembers.addElement("Evan Salter, es@usask.com");
+		for(String member: groupMembers)
+		{
+			maxWidth = Math.max(maxWidth, fm.stringWidth(member) + 10);
+		}
 
 		try
 		{
@@ -70,6 +83,11 @@ public class SplashScreen extends JComponent
 			(screen.height - size.height) / 2);
 		win.validate();
 		win.setVisible(true);
+		try {
+			TimeUnit.SECONDS.sleep(10);
+		} catch(InterruptedException e) {
+			Log.log(Log.WARNING, GUIUtilities.class, "Adding delay to splash");
+		}
 	}
 
 	public void dispose()
@@ -160,6 +178,13 @@ public class SplashScreen extends JComponent
 			getWidth() - fm.stringWidth(version) - 2,
 			image.getHeight(this) - fm.getDescent());
 		notify();
+
+		int y = 50;
+		for(String member: groupMembers)
+		{
+			g.drawString(member,maxWidth - fm.stringWidth(member),y);
+			y += 10;
+		}
 	}
 
 	// private members
@@ -171,5 +196,7 @@ public class SplashScreen extends JComponent
 	private static final int PROGRESS_COUNT = 28;
 	private String label;
 	private String lastLabel;
+	private Vector<String> groupMembers;
+	private int maxWidth;
 	private long lastAdvanceTime = System.currentTimeMillis();
 }
