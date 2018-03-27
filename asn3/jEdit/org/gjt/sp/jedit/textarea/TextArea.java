@@ -2319,21 +2319,34 @@ loop:			for(int i = 0; i < text.length(); i++)
 		}
 	} //}}}
 	
+	//{{{ adjustFontSize() method
+	/**
+	 * Adjusts the current font size by the given magnitude
+	 * @param magnitude the amount to adjust the font size by (can be positive or negative)
+	 */
 	private void adjustFontSize(int magnitude) {
 		Font oldFont = painter.getFont();
 		int newSize = Math.max(1, oldFont.getSize() + magnitude);
 		Font newFont = new Font(oldFont.getName(), oldFont.getStyle(), newSize);
 		painter.setFont(newFont);
 		painter.getStyles()[0] = new SyntaxStyle(Color.black, Color.white, newFont);
-	}
+	} //}}}
 	
+	//{{{ zoomPlus() method
+	/**
+	 * Increases the font size of the editor
+	 */
 	public void zoomPlus() {
 		adjustFontSize(3);
-	}
+	} //}}}
 	
+	//{{{ zoomMinus() method
+	/**
+	 * Decreases the font size of the editor
+	 */
 	public void zoomMinus() {
 		adjustFontSize(-3);
-	}
+	} //}}}
 
 	//{{{ goToNextCharacter() method
 	/**
