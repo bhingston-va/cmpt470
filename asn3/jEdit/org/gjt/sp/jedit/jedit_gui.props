@@ -473,6 +473,9 @@ view=new-view \
      new-plain-view \
      close-view \
      - \
+     zoom-plus \
+     zoom-minus \
+     - \
      prev-buffer \
      next-buffer \
      recent-buffer \
@@ -486,6 +489,8 @@ view=new-view \
 view.label=$View
 new-view.label=New $View
 new-plain-view.label=Ne$w Plain View
+zoom-plus.label=zoom+
+zoom-minus.label=zoom-
 close-view.label=$Close View
 prev-buffer.label=Go to $Previous Buffer
 next-buffer.label=Go to $Next Buffer
@@ -883,7 +888,7 @@ about.text=jEdit is brought to you by\n\
 	Ben Williams\n\
 	Bertalan Fodor\n\
 	Bill McMilleon\n\
-	Björn "Vampire" Kautler\n\
+	Bjï¿½rn "Vampire" Kautler\n\
 	Brad Mace\n\
 	Brant Langer Gurganus\n\
 	Brett Smith\n\

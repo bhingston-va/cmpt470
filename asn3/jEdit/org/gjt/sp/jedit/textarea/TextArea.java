@@ -2318,6 +2318,22 @@ loop:			for(int i = 0; i < text.length(); i++)
 			moveCaretPosition(newCaret);
 		}
 	} //}}}
+	
+	private void adjustFontSize(int magnitude) {
+		Font oldFont = painter.getFont();
+		int newSize = Math.max(1, oldFont.getSize() + magnitude);
+		Font newFont = new Font(oldFont.getName(), oldFont.getStyle(), newSize);
+		painter.setFont(newFont);
+		painter.getStyles()[0] = new SyntaxStyle(Color.black, Color.white, newFont);
+	}
+	
+	public void zoomPlus() {
+		adjustFontSize(3);
+	}
+	
+	public void zoomMinus() {
+		adjustFontSize(-3);
+	}
 
 	//{{{ goToNextCharacter() method
 	/**
