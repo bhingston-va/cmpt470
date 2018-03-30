@@ -1289,6 +1289,15 @@
 	</IS_SELECTED>
 </ACTION>
 
+<ACTION NAME="toggle-show-whitespace">
+	<CODE>
+		textArea.toggleShowWhitespace();
+	</CODE>
+	<IS_SELECTED>
+		return textArea.isShowWhitespaceEnabled();
+	</IS_SELECTED>
+</ACTION>
+
 <ACTION NAME="toggle-word-wrap">
 	<CODE>
 		buffer.toggleWordWrap(view);
