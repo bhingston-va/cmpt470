@@ -85,11 +85,7 @@ public class SplashScreen extends JComponent
 		win.validate();
 		win.setVisible(true);
 		thread = new AnimationThread();
-//		try {
-//			TimeUnit.SECONDS.sleep(10);
-//		} catch(InterruptedException e) {
-//			Log.log(Log.WARNING, GUIUtilities.class, "Adding delay to splash");
-//		}
+		thread.start();
 	}
 
 	public void dispose()
@@ -182,11 +178,13 @@ public class SplashScreen extends JComponent
 			image.getHeight(this) - fm.getDescent());
 		notify();
 
-		int firstLineOffset = scrollPosition;
-		int y = firstLineOffset;
+		boolean isAboveProgressBar;
+		int y = scrollPosition;
 		for(String member: groupMembers)
 		{
-			g.drawString(member,(maxWidth - fm.stringWidth(member))/2,y);
+		    isAboveProgressBar = y < (INITIAL_SCROLL_HEIGHT - PROGRESS_HEIGHT + 10);
+		    if (isAboveProgressBar)
+				g.drawString(member, (maxWidth - fm.stringWidth(member)) / 2, y);
 			y += fm.getHeight();
 		}
 	}
@@ -199,7 +197,7 @@ public class SplashScreen extends JComponent
 		AnimationThread()
 		{
 			super("Splash screen animation thread");
-			setPriority(Thread.MIN_PRIORITY);
+			setPriority(Thread.MAX_PRIORITY);
 		}
 
 		public void kill()
@@ -214,17 +212,20 @@ public class SplashScreen extends JComponent
 			while (running)
 			{
 				splash.scrollPosition -= 2;
-//				if(scrollPosition < 0)
-//					resetScrollPosition();
+
+				int lastMemberIsOffScreen = 0 - (fm.getHeight() * groupMembers.size());
+				if(scrollPosition < lastMemberIsOffScreen)
+					resetScrollPosition();
 
 				try
 				{
-					Thread.sleep(80);
+					Thread.sleep(10);
+				} catch (Exception e)
+				{
 				}
-				catch(Exception e) {}
-			}
 
-			splash.repaint();
+				splash.repaint();
+			}
 		}
 
 	    public boolean isRunning()
@@ -245,7 +246,7 @@ public class SplashScreen extends JComponent
 	private int progress;
 	private static final int PROGRESS_HEIGHT = 20;
 	private static final int PROGRESS_COUNT = 28;
-	private static final int INITIAL_SCROLL_HEIGHT= 200;
+	private static final int INITIAL_SCROLL_HEIGHT = 309;
 	private String label;
 	private String lastLabel;
 	private Vector<String> groupMembers;
