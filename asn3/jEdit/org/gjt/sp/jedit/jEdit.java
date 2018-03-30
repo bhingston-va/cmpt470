@@ -24,6 +24,8 @@ package org.gjt.sp.jedit;
 //{{{ Imports
 import bsh.UtilEvalError;
 import javax.swing.*;
+import javax.swing.text.Segment;
+
 import java.awt.event.KeyEvent;
 import java.awt.*;
 import java.io.*;
@@ -2153,6 +2155,23 @@ public class jEdit
 	{
 		return newView(view,buffer,false);
 	} //}}}
+	
+	public static View newViewAndBuffer(View view, Buffer buffer)
+	{
+		Segment seg;
+		View newView;
+		Buffer newBuffer;
+		
+		seg = new Segment();
+		newView = newView(view, buffer);
+		newBuffer = newFile(newView);
+		
+		buffer.getText(0, buffer.getLength(), seg);
+		
+		newBuffer.insert(0, seg);
+		
+		return newView;
+	}
 
 	//{{{ newView() method
 	/**
