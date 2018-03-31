@@ -21,11 +21,8 @@ package org.gjt.sp.jedit.gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Iterator;
 import java.util.Vector;
-import java.util.concurrent.TimeUnit;
 
-import org.gjt.sp.jedit.GUIUtilities;
 import org.gjt.sp.jedit.jEdit;
 import org.gjt.sp.util.Log;
 
