@@ -48,9 +48,9 @@ public class SplashScreen extends JComponent
 
 		scrollPosition = INITIAL_SCROLL_HEIGHT;
 		groupMembers = new Vector<String>(3);
-		groupMembers.addElement("Corey Hickson, ch@usask.com");
+		groupMembers.addElement("Corey Hickson, crh208@usask.com");
 		groupMembers.addElement("Benj Hinsgton, benj.hignston@usask.com");
-		groupMembers.addElement("Evan Salter, es@usask.com");
+		groupMembers.addElement("Evan Salter, evs162@usask.com");
 		for(String member: groupMembers)
 		{
 			maxWidth = Math.max(maxWidth, fm.stringWidth(member) + 100);
@@ -224,11 +224,6 @@ public class SplashScreen extends JComponent
 				splash.repaint();
 			}
 		}
-
-	    public boolean isRunning()
-	    {
-	    	return running;
-	    }
 	}
 
 	private void resetScrollPosition()
