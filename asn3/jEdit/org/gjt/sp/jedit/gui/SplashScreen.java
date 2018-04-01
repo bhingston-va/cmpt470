@@ -21,6 +21,7 @@ package org.gjt.sp.jedit.gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Vector;
 
 import org.gjt.sp.jedit.jEdit;
 import org.gjt.sp.util.Log;
@@ -44,6 +45,16 @@ public class SplashScreen extends JComponent
 			getClass().getResource("/org/gjt/sp/jedit/icons/splash.png"));
 		MediaTracker tracker = new MediaTracker(this);
 		tracker.addImage(image,0);
+
+		scrollPosition = INITIAL_SCROLL_HEIGHT;
+		groupMembers = new Vector<String>(3);
+		groupMembers.addElement("Corey Hickson, crh208@usask.com");
+		groupMembers.addElement("Benj Hinsgton, benj.hignston@usask.com");
+		groupMembers.addElement("Evan Salter, evs162@usask.com");
+		for(String member: groupMembers)
+		{
+			maxWidth = Math.max(maxWidth, fm.stringWidth(member) + 100);
+		}
 
 		try
 		{
@@ -70,10 +81,13 @@ public class SplashScreen extends JComponent
 			(screen.height - size.height) / 2);
 		win.validate();
 		win.setVisible(true);
+		thread = new AnimationThread();
+		thread.start();
 	}
 
 	public void dispose()
 	{
+	    thread.kill();
 		win.dispose();
 	}
 
@@ -160,6 +174,61 @@ public class SplashScreen extends JComponent
 			getWidth() - fm.stringWidth(version) - 2,
 			image.getHeight(this) - fm.getDescent());
 		notify();
+
+		boolean isAboveProgressBar;
+		int y = scrollPosition;
+		for(String member: groupMembers)
+		{
+		    isAboveProgressBar = y < (INITIAL_SCROLL_HEIGHT - PROGRESS_HEIGHT + 10);
+		    if (isAboveProgressBar)
+				g.drawString(member, (maxWidth - fm.stringWidth(member)) / 2, y);
+			y += fm.getHeight();
+		}
+	}
+
+	class AnimationThread extends Thread
+	{
+		private boolean running = true;
+		final SplashScreen splash = SplashScreen.this;
+
+		AnimationThread()
+		{
+			super("Splash screen animation thread");
+			setPriority(Thread.MAX_PRIORITY);
+		}
+
+		public void kill()
+		{
+			running = false;
+		}
+
+		public void run()
+		{
+			FontMetrics fm = getFontMetrics(getFont());
+
+			while (running)
+			{
+				splash.scrollPosition -= 2;
+
+				int lastMemberIsOffScreen = 0 - (fm.getHeight() * groupMembers.size());
+				if(scrollPosition < lastMemberIsOffScreen)
+					resetScrollPosition();
+
+				try
+				{
+					Thread.sleep(10);
+				} catch (Exception e)
+				{
+				}
+
+				splash.repaint();
+			}
+		}
+	}
+
+	private void resetScrollPosition()
+	{
+		scrollPosition = INITIAL_SCROLL_HEIGHT;
 	}
 
 	// private members
@@ -169,7 +238,12 @@ public class SplashScreen extends JComponent
 	private int progress;
 	private static final int PROGRESS_HEIGHT = 20;
 	private static final int PROGRESS_COUNT = 28;
+	private static final int INITIAL_SCROLL_HEIGHT = 309;
 	private String label;
 	private String lastLabel;
+	private Vector<String> groupMembers;
+	private int maxWidth;
+	private int scrollPosition;
+	private AnimationThread thread;
 	private long lastAdvanceTime = System.currentTimeMillis();
 }
