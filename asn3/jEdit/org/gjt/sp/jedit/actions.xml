@@ -533,6 +533,12 @@
 	</CODE>
 </ACTION>
 
+<ACTION NAME="new-view-and-buffer">
+	<CODE>
+		jEdit.newViewAndBuffer(view,buffer);
+	</CODE>
+</ACTION>
+
 <ACTION NAME="next-bracket">
 	<CODE>
 		textArea.goToNextBracket(false);
