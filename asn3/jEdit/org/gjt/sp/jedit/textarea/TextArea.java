@@ -4451,7 +4451,7 @@ loop:		for(int i = lineNo - 1; i >= 0; i--)
 	/**
 	 * Toggles whether the all whitespace symbols (newlines, blanks, and tabs) will be shown.
 	 */
-	private void toggleShowWhitespace()
+	public void toggleShowWhitespace()
 	{
 		showWhitespace = !showWhitespace;
 
@@ -4473,7 +4473,7 @@ loop:		for(int i = lineNo - 1; i >= 0; i--)
 	/**
 	 * Returns if show whitespace is enabled.
 	 */
-	private boolean isShowWhitespaceEnabled()
+	public boolean isShowWhitespaceEnabled()
 	{
 		return showWhitespace;
 	}
