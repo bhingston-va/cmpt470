@@ -474,6 +474,9 @@ view=new-view \
      new-view-and-buffer \
      close-view \
      - \
+     zoom-plus \
+     zoom-minus \
+     - \
      prev-buffer \
      next-buffer \
      recent-buffer \
@@ -488,6 +491,8 @@ view=new-view \
 view.label=$View
 new-view.label=New $View
 new-plain-view.label=Ne$w Plain View
+zoom-plus.label=zoom+
+zoom-minus.label=zoom-
 new-view-and-buffer.label=New View And B$uffer
 close-view.label=$Close View
 prev-buffer.label=Go to $Previous Buffer

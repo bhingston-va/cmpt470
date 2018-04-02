@@ -527,6 +527,18 @@
 	</CODE>
 </ACTION>
 
+<ACTION NAME="zoom-plus">
+	<CODE>
+		textArea.zoomPlus();
+	</CODE>
+</ACTION>
+
+<ACTION NAME="zoom-minus">
+	<CODE>
+		textArea.zoomMinus();
+	</CODE>
+</ACTION>
+
 <ACTION NAME="new-view">
 	<CODE>
 		jEdit.newView(view);
