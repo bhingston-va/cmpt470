@@ -471,6 +471,7 @@ next-fold.label=Go to $Next Fold
 #{{{ View menu
 view=new-view \
      new-plain-view \
+     new-view-and-buffer \
      close-view \
      - \
      zoom-plus \
@@ -482,6 +483,7 @@ view=new-view \
      show-buffer-switcher \
      - \
      toggle-line-numbers \
+     toggle-show-whitespace \
      - \
      %scrolling \
      %splitting \
@@ -491,12 +493,14 @@ new-view.label=New $View
 new-plain-view.label=Ne$w Plain View
 zoom-plus.label=zoom+
 zoom-minus.label=zoom-
+new-view-and-buffer.label=New View And B$uffer
 close-view.label=$Close View
 prev-buffer.label=Go to $Previous Buffer
 next-buffer.label=Go to $Next Buffer
 recent-buffer.label=Go to $Recent Buffer
 show-buffer-switcher.label=Show $Buffer Switcher
 toggle-line-numbers.label=$Line Numbers
+toggle-show-whitespace.label=$Show/Hide Whitespace
 
 #{{{ Scrolling menu
 scrolling=scroll-to-current-line \
