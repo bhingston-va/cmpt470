@@ -383,9 +383,9 @@ public class SearchDialog extends EnhancedDialog implements EBComponent
 			public void valueChanged(ListSelectionEvent e) {
 				int selectedIndex = history.getSelectedIndex();
 				if (selectedIndex > -1) {
-					String selectedValue = (String) find.getModel().elementAt(history.getSelectedIndex());
+					String selectedValue = (String) find.getModel().elementAt(selectedIndex);
 					find.setText(selectedValue);
-					find.getController().setIndex(history.getSelectedIndex());
+					find.getController().setIndex(selectedIndex);
 				}
 			}
 		});
