@@ -366,6 +366,7 @@ public class SearchDialog extends EnhancedDialog implements EBComponent
 		cons.gridy++;
 	} //}}}
 	
+	//{{{ createHistoryListBox() method
 	private void createHistoryListBox(JPanel fieldPanel, GridBagConstraints cons) {
 		JLabel label = new JLabel(jEdit.getProperty("search.history"));
 		
@@ -401,7 +402,7 @@ public class SearchDialog extends EnhancedDialog implements EBComponent
 		cons.weighty = 1.0;
 		fieldPanel.add(history, cons);
 		cons.gridy++;
-	}
+	} //}}}
 
 	//{{{ createReplaceLabelAndField() method
 	private void createReplaceLabelAndField(JPanel fieldPanel,
