@@ -1246,6 +1246,7 @@ search.title=Search And Replace
 search.find=Search for:
 search.find.tooltip=PgUp/PgDown or right-click to recall previous
 search.find.mnemonic=s
+search.history=History:
 search.replace=Replace with:
 search.replace.mnemonic=w
 search.string-replace-btn=Text
