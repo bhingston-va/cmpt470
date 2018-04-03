@@ -71,6 +71,11 @@ public class HistoryTextArea extends JTextArea
 	{
 		return controller.getModel();
 	} //}}}
+	
+	//{{{ getController() method
+	public HistoryText getController() {
+		return controller;
+	} //}}}
 
 	//{{{ setModel() method
 	/**
