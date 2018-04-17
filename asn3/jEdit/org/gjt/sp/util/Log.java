@@ -23,6 +23,7 @@
 package org.gjt.sp.util;
 
 import java.io.*;
+import java.sql.Timestamp;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.event.*;
@@ -354,7 +355,8 @@ public class Log
 	//{{{ _log() method
 	private static void _log(int urgency, String source, String message)
 	{
-		String fullMessage = '[' + urgencyToString(urgency) + "] " + source
+		Timestamp currentTime = new Timestamp (new java.util.Date().getTime());
+		String fullMessage = '[' + urgencyToString(urgency) + "] " + currentTime.toString() + " " + source
 			+ ": " + message;
 
 		try

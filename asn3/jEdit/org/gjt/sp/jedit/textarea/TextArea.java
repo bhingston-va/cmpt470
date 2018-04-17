@@ -2318,6 +2318,35 @@ loop:			for(int i = 0; i < text.length(); i++)
 			moveCaretPosition(newCaret);
 		}
 	} //}}}
+	
+	//{{{ adjustFontSize() method
+	/**
+	 * Adjusts the current font size by the given magnitude
+	 * @param magnitude the amount to adjust the font size by (can be positive or negative)
+	 */
+	private void adjustFontSize(int magnitude) {
+		Font oldFont = painter.getFont();
+		int newSize = Math.max(1, oldFont.getSize() + magnitude);
+		Font newFont = new Font(oldFont.getName(), oldFont.getStyle(), newSize);
+		painter.setFont(newFont);
+		painter.getStyles()[0] = new SyntaxStyle(Color.black, Color.white, newFont);
+	} //}}}
+	
+	//{{{ zoomPlus() method
+	/**
+	 * Increases the font size of the editor
+	 */
+	public void zoomPlus() {
+		adjustFontSize(3);
+	} //}}}
+	
+	//{{{ zoomMinus() method
+	/**
+	 * Decreases the font size of the editor
+	 */
+	public void zoomMinus() {
+		adjustFontSize(-3);
+	} //}}}
 
 	//{{{ goToNextCharacter() method
 	/**
@@ -4412,6 +4441,73 @@ loop:		for(int i = lineNo - 1; i >= 0; i--)
 		}
 		while (selection.startLine < selection.endLine);
 	} //}}}
+
+	//{{{ tabString() method
+	/***
+	 * repeats tabChar
+	 */
+	private String tabString() {
+		return new String(new char[buffer.getTabSize()]).replace("\0", String.valueOf(tabChar));
+	}
+
+	//{{{ showWhitespace() method
+	/**
+	 * Shows whitespace
+	 */
+	private void showWhitespace()
+	{
+		buffer.beginCompoundEdit();
+		String newText = getText().replaceAll(" ", String.valueOf(blankChar));
+		newText = newText.replaceAll("\t", tabString());
+		setText(newText);
+		buffer.endCompoundEdit();
+	}
+
+	//{{{ hideWhitespace() method
+	/**
+	 * Hides whitespace
+	 */
+	private void hideWhitespace()
+	{
+		buffer.beginCompoundEdit();
+		String newText = getText().replaceAll(String.valueOf(blankChar), " ");
+		newText = newText.replaceAll(tabString(), "\t");
+		setText(newText);
+		buffer.endCompoundEdit();
+	}
+
+	//{{{ toggleShowWhitespace() method
+	/**
+	 * Toggles whether the all whitespace symbols (newlines, blanks, and tabs) will be shown.
+	 */
+	public void toggleShowWhitespace()
+	{
+		showWhitespace = !showWhitespace;
+
+		if(!buffer.isEditable())
+		{
+			getToolkit().beep();
+			return;
+		}
+
+		if (showWhitespace) {
+			showWhitespace();
+		} else {
+			hideWhitespace();
+		}
+	}
+	//}}}
+
+	//{{{ isShowWhitespaceEnabled() method
+	/**
+	 * Returns if show whitespace is enabled.
+	 */
+	public boolean isShowWhitespaceEnabled()
+	{
+		return showWhitespace;
+	}
+	//}}}
+
 	//}}}
 
 	//{{{ AWT stuff
@@ -5109,6 +5205,10 @@ loop:		for(int i = lineNo - 1; i >= 0; i--)
 	protected boolean multi;
 	private boolean overwrite;
 	private boolean rectangularSelectionMode;
+
+	private boolean showWhitespace;
+	private char blankChar = '\u2E30';
+	private char tabChar = '\u2D3E';
 
 	private boolean dndEnabled;
 	private boolean dndInProgress;

@@ -24,6 +24,8 @@ package org.gjt.sp.jedit.search;
 
 //{{{ Imports
 import javax.swing.border.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.*;
 
 import java.awt.*;
@@ -276,6 +278,7 @@ public class SearchDialog extends EnhancedDialog implements EBComponent
 
 	// fields
 	private HistoryTextArea find, replace;
+	private JList history;
 
 	private JRadioButton stringReplace, beanShellReplace;
 
@@ -362,6 +365,44 @@ public class SearchDialog extends EnhancedDialog implements EBComponent
 		fieldPanel.add(new JScrollPane(find),cons);
 		cons.gridy++;
 	} //}}}
+	
+	//{{{ createHistoryListBox() method
+	private void createHistoryListBox(JPanel fieldPanel, GridBagConstraints cons) {
+		JLabel label = new JLabel(jEdit.getProperty("search.history"));
+		
+		history = new JList(find.getModel());
+		history.setFixedCellHeight(15);
+		history.setVisibleRowCount(5);
+		history.setLayoutOrientation(JList.VERTICAL);
+		int height = history.getFixedCellHeight() * history.getVisibleRowCount();
+		history.setPreferredSize(new Dimension(cons.gridwidth, height));
+		history.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		history.addListSelectionListener(new ListSelectionListener() {
+
+			public void valueChanged(ListSelectionEvent e) {
+				int selectedIndex = history.getSelectedIndex();
+				if (selectedIndex > -1) {
+					String selectedValue = (String) find.getModel().elementAt(selectedIndex);
+					find.setText(selectedValue);
+					find.getController().setIndex(selectedIndex);
+				}
+			}
+		});
+		
+		label.setLabelFor(history);
+		label.setBorder(new EmptyBorder(12,0,2,0));
+		
+		cons.gridx = 0;
+		cons.weightx = 0.0;
+		cons.weighty = 0.0;
+		fieldPanel.add(label, cons);
+		cons.gridy++;
+		cons.weightx = 1.0;
+		cons.weighty = 1.0;
+		fieldPanel.add(history, cons);
+		cons.gridy++;
+	} //}}}
 
 	//{{{ createReplaceLabelAndField() method
 	private void createReplaceLabelAndField(JPanel fieldPanel,
@@ -428,6 +469,7 @@ public class SearchDialog extends EnhancedDialog implements EBComponent
 		cons.gridwidth = 2;
 
 		createFindLabelAndField(fieldPanel,cons);
+		createHistoryListBox(fieldPanel, cons);
 		createReplaceLabelAndField(fieldPanel,cons);
 
 		return fieldPanel;

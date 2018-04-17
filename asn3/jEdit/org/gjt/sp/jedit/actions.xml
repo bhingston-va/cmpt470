@@ -527,9 +527,27 @@
 	</CODE>
 </ACTION>
 
+<ACTION NAME="zoom-plus">
+	<CODE>
+		textArea.zoomPlus();
+	</CODE>
+</ACTION>
+
+<ACTION NAME="zoom-minus">
+	<CODE>
+		textArea.zoomMinus();
+	</CODE>
+</ACTION>
+
 <ACTION NAME="new-view">
 	<CODE>
 		jEdit.newView(view);
+	</CODE>
+</ACTION>
+
+<ACTION NAME="new-view-and-buffer">
+	<CODE>
+		jEdit.newViewAndBuffer(view,buffer);
 	</CODE>
 </ACTION>
 
@@ -1286,6 +1304,15 @@
 	</CODE>
 	<IS_SELECTED>
 		return textArea.isRectangularSelectionEnabled();
+	</IS_SELECTED>
+</ACTION>
+
+<ACTION NAME="toggle-show-whitespace">
+	<CODE>
+		textArea.toggleShowWhitespace();
+	</CODE>
+	<IS_SELECTED>
+		return textArea.isShowWhitespaceEnabled();
 	</IS_SELECTED>
 </ACTION>
 

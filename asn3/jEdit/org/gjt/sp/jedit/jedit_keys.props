@@ -75,6 +75,8 @@ hypersearch.shortcut=C+PERIOD
 scroll-up-line.shortcut=C+QUOTE
 scroll-down-line.shortcut=C+SLASH
 toggle-multi-select.shortcut=C+BACK_SLASH
+zoom-plus.shortcut=C+EQUALS
+zoom-minus.shortcut=C+MINUS
 #}}}
 
 #{{{ C+e C+X
